@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Depurar con GDB",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ex01/phonebook",
+            "args": [""],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/ex01/",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "Compilar",
+			"internalConsoleOptions": "neverOpen",
+			"logging": {
+                "engineLogging": false,
+                "trace": false,
+                "traceResponse": false
+            },
+			"launchCompleteCommand": "exec-run",
+            "sourceFileMap": {
+                "/mnt/c": "c:\\"
+            }
+        }
+    ]
+}
