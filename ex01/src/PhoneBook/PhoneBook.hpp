@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:00:18 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/02 15:46:15 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/02 20:36:28 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class	PhoneBook
 {
 	private:
-		Contact contacts[7];
+		Contact contacts[8];
 		void	copyContacts(const Contact contacts[]);
 		int		last_index;
 

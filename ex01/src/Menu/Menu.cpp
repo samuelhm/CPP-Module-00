@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 15:52:29 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/02 19:59:22 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/02 20:22:40 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ namespace Menu
 	void	SearchMenu(PhoneBook &phoneBook)
 	{
 		int	count;
+		int	cindex;
 		count = ContactsAvailable(phoneBook);
 		if (count == 0)
 		{
@@ -79,9 +80,25 @@ namespace Menu
 		std::system("clear");
 		Menu::FrameTittle("Contact List");
 		Menu::FrameContact(count, phoneBook);
+		std::cout << std::endl << "Selecciona un contacto: ";
+		std::cout << "\033[J";
+		do
+		{
+			cindex = GetContactIndex();
+		} while (cindex > count || cindex < 0);
+		PrintContact(phoneBook.getContact(cindex));
 		std::cin.get();
 		std::cin.clear();
+		option = 0;
+	}
 
+	void	PrintContact(Contact contact)
+	{
+		std::cout << "First Name:     " << contact.getName()    << std::endl;
+		std::cout << "Last Name:      " << contact.getLastName()     << std::endl;
+		std::cout << "Nickname:       " << contact.getNickName()     << std::endl;
+		std::cout << "Phone Number:   " << contact.getPhoneNumber()  << std::endl;
+		std::cout << "Darkest Secret: " << contact.getDarkSecret() << std::endl;
 	}
 	void	AddContactMenu(PhoneBook &phoneBook)
 	{
@@ -129,6 +146,25 @@ namespace Menu
 		}
 	}
 
+	int	GetContactIndex()
+	{
+		std::string line;
+		if (!std::getline(std::cin, line))
+		{
+			std::cin.clear();
+			return (-1);
+		}
+		if (line.size() == 1 && line[0] >= '0' && line[0] <= '7')
+		{
+			int index = line[0] - '0';
+			return (index);
+		}
+		else
+		{
+			std::cout << "\033[A\033[KSelecciona un contacto: " << "\033[J";
+			return (-1);
+		}
+	}
 	int	GetOption()
 	{
 		std::string line;

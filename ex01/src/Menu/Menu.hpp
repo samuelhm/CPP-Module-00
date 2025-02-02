@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 16:06:56 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/02 19:44:30 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/02 20:19:24 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ namespace Menu
 	void		Frame(const std::string &texto);
 	void		FrameTittle(const std::string &texto);
 	int			GetOption();
+	int			GetContactIndex();
 	void		ShowMainMenu();
 	void		AddContactMenu(PhoneBook &phoneBook);
 	void		SearchMenu(PhoneBook &phoneBook);
@@ -36,6 +37,7 @@ namespace Menu
 	std::string	AddStringValue(const std::string &type);
 	int			ContactsAvailable(PhoneBook &phoneBook);
 	void		FrameContact(int count, PhoneBook &phoneBook);
+	void		PrintContact(Contact contact);
 }
 
 #endif // MENU_HPP
