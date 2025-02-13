@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+         #
+#    By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:23:11 by shurtado          #+#    #+#              #
-#    Updated: 2025/02/02 21:04:56 by shurtado         ###   ########.fr        #
+#    Updated: 2025/02/13 17:21:07 by shurtado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	account
 CC			=	c++
-CPPFLAGS	=	-g -Wall -Werror -Wextra -std=c++98 -MMD -MP
+CPPFLAGS	=	-g -Wall -Werror -Wextra -std=c++98 -MMD -MP -Isrc/Account/
 
 CLASSES		=	Account
 
