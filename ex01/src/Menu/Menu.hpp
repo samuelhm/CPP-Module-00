@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Menu.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 16:06:56 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/02 20:19:24 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/03/23 17:03:42 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <sstream>
 #include <iostream>
 #include <string>
+#include <cstdio>
 #include "../Contact/Contact.hpp"
 #include "../PhoneBook/PhoneBook.hpp"
 

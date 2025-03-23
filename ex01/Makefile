@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+         #
+#    By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:23:11 by shurtado          #+#    #+#              #
-#    Updated: 2025/02/02 17:17:54 by shurtado         ###   ########.fr        #
+#    Updated: 2025/03/23 17:42:02 by shurtado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CPPFLAGS) -o $@ $^
 
-obj/%.o: %.cpp
+obj/%.o: %.cpp Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CPPFLAGS) -c $< -o $@
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Menu.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 15:52:29 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/02 20:22:40 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/03/23 17:39:31 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ namespace Menu
 		do
 		{
 			cindex = GetContactIndex();
-		} while (cindex > count || cindex < 0);
+		} while (cindex > count - 1 || cindex < 0);
 		PrintContact(phoneBook.getContact(cindex));
 		std::cin.get();
 		std::cin.clear();
@@ -125,32 +125,82 @@ namespace Menu
 		return true;
 	}
 
-	std::string	AddStringValue(const std::string &type)
+	/*
+	std::string AddStringValue(const std::string &type)
 	{
-		std::cout << "Insert "<< type <<": ";
 		std::string line;
+
 		while (true)
 		{
-			if (!std::getline(std::cin, line))
+			std::cout << "\r\033[KInsert " << type << ": ";
+			std::cout.flush();
+
+			bool got_input = false;
+			if(std::getline(std::cin, line))
+				got_input = true;
+
+			if (!got_input)
 			{
-				std::cin.clear();
-				continue ;
+				if (std::cin.eof())
+				{
+					std::cin.clear();
+					std::clearerr(stdin);
+					line.clear();
+					continue;
+				}
+				else
+				{
+					std::cin.clear();
+					continue;
+				}
 			}
-			if(line.empty() || (type == "Phone Number" && !CheckNumbers(line)))
-			{
-				std::cout << "\033[A\033[KInsert " << type << ": " << "\033[J";
+
+			if (line.empty() || (type == "Phone Number" && !CheckNumbers(line)))
 				continue;
-			}
-			else
-				return (line);
+			return line;
 		}
 	}
+*/
+
+std::string AddStringValue(const std::string &type)
+{
+	std::string line;
+
+	while (true)
+	{
+		std::cout << "\r\033[KInsert " << type << ": ";
+		std::cout.flush();
+
+		if (!std::getline(std::cin, line))
+		{
+			std::cin.clear();
+			std::clearerr(stdin);
+			line.clear(); // ← ¡esta línea es vital!
+			continue;
+		}
+
+		// Si Ctrl+D fue pulsado, getline() falló y no llegamos hasta aquí
+
+		if (line.empty() || (type == "Phone Number" && !CheckNumbers(line)))
+			continue;
+
+		return line;
+	}
+}
+
+
 
 	int	GetContactIndex()
 	{
 		std::string line;
 		if (!std::getline(std::cin, line))
 		{
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+				std::clearerr(stdin);
+				return (-1);
+			}
 			std::cin.clear();
 			return (-1);
 		}
@@ -170,6 +220,12 @@ namespace Menu
 		std::string line;
 		if (!std::getline(std::cin, line))
 		{
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+				std::clearerr(stdin);
+				return (-1);
+			}
 			std::cin.clear();
 			return (-1);
 		}
