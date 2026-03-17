@@ -1,62 +1,64 @@
-README.md creado exitosamente con:
+# CPP Module00 - Fundamentos de C++ yPOO
 
-- Título y badges de tecnologías detectadas (C++98, Makefile, OOP, AddressSanitizer)
-- Elevator pitch sobre el propósito del módulo
-- Features de cada ejercicio (Megaphone, PhoneBook, Account)
-- Stack tecnológico extraído de los Makefiles y código
-- Decisiones técnicas explicando C++98 y Rule of Three
-- Diagrama Mermaid con arquitectura de los 3 ejercicios
-- Guíade instalación con comandos make
-- Sección de contacto
-Elevator Pitch:** Este módulo representa la introducción formal a C++ en el currículum deEscuela 42, sentando las bases del desarrollo orientado a objetos. A través de tres ejercicios progresivos, se exploran los fundamentos esenciales: depuiso de I/O streams hasta la implementación completa de clases con encapsulación, gestión de memoria y uso de contenedores STL.
+![Language](https://img.shields.io/badge/Language-C++98-00599C?style=flat-square&logo=cplusplus)
+![Standard](https://img.shields.io/badge/Standard-C++98-blue?style=flat-square)
+![Build](https://img.shields.io/badge/Build-Makefile-success?style=flat-square)
+![Paradigm](https://img.shields.io/badge/Paradigm-OOP-orange?style=flat-square)
+![Debug](https://img.shields.io/badge/Debug-AddressSanitizer-purple?style=flat-square)
+![Learning](https://img.shields.io/badge/Learning-Memory_Management-red?style=flat-square)
+
+---
+
+## Descripción
+
+Módulo introductorio de C++ del currículum de Escuela 42 que establece los fundamentos de la programación orientada a objetos mediante tres ejercicios progresivos: manipulación de I/O streams, diseño de clases con encapsulación, e implementación de miembros estáticos con gestión de memoria manual.
 
 ---
 
 ## Características Principales
 
 ### Megaphone (ex00)
-- Transformación de texto a mayúsculas via línea de comandos
-- Manejo de argumentos `argc/argv`
-- Introducción a `std::iostream`
+- Transformación de argumentos CLI a mayúsculas
+- Manejo de `argc/argv` y flujos `std::iostream`
+- Mensaje por defecto cuando no hay input
 
 ### PhoneBook (ex01)
-- Agenda telefónica interactiva con capacidad para8 contactos
-- Implementación completa de orientación a objetos:
-  - Clases `Contact`, `PhoneBook`, `Menu`
-  - Constructor de copia y operador de asignación
-  - Encapsulación con getters/setters
-- Validación de entrada y formato tabular
-- Interfaz de terminal con frames ASCII
+- Agenda telefónica interactiva (máximo 8contactos)
+- Arquitectura multi-clase: `PhoneBook`, `Contact`, `Menu`
+- Implementación completa de **Rule of Three** (constructor copia, operador asignación, destructor)
+- Validación de entrada con interfaz ASCII tabular
+- Comandos: `ADD`, `SEARCH`, `EXIT`
 
 ### Account (ex02)
-- Sistema de cuentas bancarias con operaciones de depósito/retiro
-- Miembros estáticos para tracking global de cuentas
+- Sistema de cuentas bancarias con depósitos/retiros
+- Miembros estáticos para tracking global del sistema
 - Logging con timestamps
-- Integración de STL: `std::vector`, `std::for_each`, `std::mem_fun_ref`
+- Uso de STL: `std::vector`, `std::for_each`, `std::mem_fun_ref`
 
 ---
 
 ## Stack Tecnológico
 
-| Componente | Tecnología |
-|------------|------------|
+| Categoría | Tecnología |
+|-----------|------------|
 | Lenguaje | C++98 |
 | Compilador | c++ (clang/g++) |
 | Build System | Makefile |
-| Librerías Estándar | `<iostream>`, `<string>`, `<vector>`, `<algorithm>`, `<iomanip>`, `<ctime>` |
-| Herramientas de Debug | AddressSanitizer (-fsanitize=address) |
+| Librerías | `<iostream>`, `<string>`, `<vector>`, `<algorithm>`, `<iomanip>`, `<ctime>`, `<sstream>` |
+| Herramientas | AddressSanitizer (-fsanitize=address) |
 
 ---
 
-## Decisiones Técnicas / Arquitectura
+## Decisiones Técnicas
 
-El proyecto sigue el estándar **C++98**, un requisito intencionado de Escuela 42 que fuerza al desarrollador adominar los fundamentos del lenguaje sin el azúcar sintáctico de estándares modernos (C++11 y superiores). Esta restricción pedagógica garantiza la comprensión profunda de:
+El uso de **C++98** como estándar obligatorio es una decisión pedagógica intencionada de Escuela 42. Sin las comodidades de C++11/14/17 (smart pointers, auto, lambdas), el desarrollador debe dominar:
 
-- **Gestión manual de recursos**: Sin smart pointers, se internaliza la responsabilidad del ciclo de vida de objetos.
-- **Rule of Three**: Implementación explícita de constructores de copia y operadores de asignación.
-- **STL clásico**: Uso de algoritmos como `std::for_each` con `std::mem_fun_ref`, patrones fundamentales que perviven en código legacy empresarial.
+- **Gestión manual de memoria**: Responsabilidad total del ciclo de vida de objetos
+- **Rule of Three**: Implementación explícita de constructores de copia y operadores de asignación para evitar memory leaks y double frees
+- **Encapsulación estricta**: Uso de `private/public`, getters/setters, yoeclusion de implementación
+- **STL clásico**: Algoritmos como `std::for_each` con adaptadores `std::mem_fun_ref`, patrones fundamentales en código legacy empresarial
 
-La arquitectura modular separa cada ejercicio en su propio directorio con Makefiles independientes, facilitando la compilación incremental y el testing aislado de cada componente.
+La arquitectura modular con Makefiles separados permite testing aislado y compilación incremental, siguiendo las buenas prácticas de sistemas de build_unix.
 
 ---
 
@@ -64,58 +66,70 @@ La arquitectura modular separa cada ejercicio en su propio directorio con Makefi
 
 ```mermaid
 flowchart TB
-    subgraph ex00["ex00: Megaphone"]
-        A[main] --> B[Argumentos CLI]
-        B --> C[toupper loop]
-        C --> D[stdout]
+    subgraph EX00["ex00: Megaphone"]
+        A[main] --> B[argc/argv]
+        B --> C{args?}
+        C -->|No| D["* LOUD NOISE *"]
+        C -->|Yes| E[toupper loop]
+        E --> F[stdout]
     end
 
-    subgraph ex01["ex01: PhoneBook"]
-        E[main.cpp] --> F[Menu]
-        F --> G[PhoneBook]
-        G --> H[Contact Array 8 slots]
-        F --> I[Input Validation]
-        I --> J[Format & Display]
+    subgraph EX01["ex01: PhoneBook"]
+        G[main.cpp] --> H[Menu namespace]
+        H --> I{Comando}
+        I -->|ADD| J[Crear Contact]
+        I -->|SEARCH| K[Mostrar Tabla]
+        I -->|EXIT| L[Fin]
+        J --> M[PhoneBook.addContact]
+        M --> N[Contact Array<br/>8 slots]
+        K --> O[Seleccionar índice]
+        O --> P[Mostrar detalle]
     end
 
-    subgraph ex02["ex02: Account"]
-        K[tests.cpp] --> L[std::vector Account]
-        L --> M[Account Class]
-        M --> N[Static Members]
-        N --> O[Global Tracking]
-        M --> P[Deposits/Withdrawals]
-        P --> Q[Timestamped Logging]
+    subgraph EX02["ex02: Account"]
+        Q[tests.cpp] --> R[std::vector Account]
+        R --> S[Account Class]
+        S --> T[Static Members]
+        T --> U[_nbAccounts]
+        T --> V[_totalAmount]
+        S --> W[makeDeposit]
+        S --> X[makeWithdrawal]
+        W --> Y[Timestamp Log]
+        X --> Y
     end
-``---
+```
+
+---
 
 ## Guía de Instalación
 
-### Requisitos Previos
+### Requisitos
+
 - Compilador C++ (g++ o clang++)
 - Make
 
-### Compilación y Ejecución
+### Compilación
 
 ```bash
-# Clonar el repositorio
 git clone https://github.com/samuelhm/CPP-Module-00.git
 cd CPP-Module-00
 
-# Ejercicio 00 - Megaphone
-cd ex00 && make && ./megaphone "hola mundo"
+# ex00 - Megaphone
+cd ex00 && make&& ./megaphone "hello world"
 
-# Ejercicio 01 - PhoneBook
+# ex01 - PhoneBook
 cd ../ex01 && make && ./phonebook
 
-# Ejercicio 02 - Account
+# ex02 - Account
 cd ../ex02 && make && ./account
 ```
 
-### Comandos Make Disponibles
+### Comandos Make
+
 ```bash
-make        # Compilar
-make clean  # Limpiar objetos
-make fclean # Limpiar todo
+make        # Compilar proyecto
+make clean  # Eliminar objetos
+make fclean # Limpiar binarios
 make re     # Recompilar desde cero
 ```
 
@@ -130,4 +144,4 @@ make re     # Recompilar desde cero
 
 ---
 
-*Este proyecto forma parte del currículum deEscuela 42 Barcelona.*
+*Proyecto del currículum de Escuela 42 Barcelona.*
